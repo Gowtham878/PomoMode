@@ -1,0 +1,20 @@
+{
+  "name": "pomomodo",
+  "version": "1.0.0",
+  "description": "app replicating pomodoro",
+  "homepage": "https://github.com/Gowtham878/PomoMode#readme",
+  "bugs": {
+    "url": "https://github.com/Gowtham878/PomoMode/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Gowtham878/PomoMode.git"
+  },
+  "license": "ISC",
+  "author": "Gowtham J",
+  "type": "module",
+  "main": "pomo.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
