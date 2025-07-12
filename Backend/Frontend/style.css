@@ -1,0 +1,292 @@
+    :root {
+      --focus-bg: #005a38;
+      --short-bg: #4c9195;
+      --long-bg: #388e3c;
+      --text-color: white;
+      --popup-bg: rgba(0, 0, 0, 0.6);
+    }
+    .signupError{
+      clip: red;
+    }
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background-color: var(--focus-bg);
+      color: var(--text-color);
+  
+      transition: background-color 0.4s ease-in-out;
+    }
+
+    nav {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+    }
+    input[type="email"],
+    input[type="password"],
+    input[type="text"] {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border-radius: 5px;
+      border: 2px solid var(--border-color);
+      
+    }
+
+
+    nav a {
+      color: var(--text-color);
+      text-decoration: none;
+      margin-left: 20px;
+      font-weight: 600;
+    }
+        .login-container,
+    .signup-container {
+      max-width: 400px;
+      margin: 100px auto;
+      background: rgba(255, 255, 255, 0.1);
+      box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+      -webkit-backdrop-filter: blur(12px); 
+      backdrop-filter: blur(12px);
+      padding: 50px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #333;
+            border-radius: 20px;
+
+      text-align: center;
+    }    
+    .glass-box {
+      margin: 100px auto;
+      background: rgba(255, 255, 255, 0.1);
+      box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+      -webkit-backdrop-filter: blur(12px); 
+      backdrop-filter: blur(12px);
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 50px;
+      text-align: center;
+      width: 460px;
+      margin-top: 60px;
+    }
+
+    .headline {
+      font-size: 2.4em;
+      font-weight: 600;
+      margin-bottom: 25px;
+    }
+
+    .tab-group {
+      display: flex;
+      justify-content: space-around;
+      margin-bottom: 30px;
+    }
+
+    .tab {
+      flex: 1;
+      margin: 0 5px;
+      padding: 12px;
+      border-radius: 12px;
+      cursor: pointer;
+      background-color: rgba(255,255,255,0.2);
+      color: var(--text-color);
+      font-weight: 600;
+    }
+
+    .tab.active {
+      background-color: rgba(255,255,255,0.2);
+      color: black;
+    }
+
+    .timer-container {
+      position: relative;
+      width: 220px;
+      height: 220px;
+      margin: 0 auto 30px;
+    }
+
+    .timer {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 3em;
+    }
+
+    .progress-ring {
+      width: 100%;
+      height: 100%;
+    }
+
+    .button-group {
+      display: flex;
+      justify-content: center;
+      border-radius: 20px;
+      gap: 10px;
+    }
+
+    .start-button, .next-button, .task-button {
+      padding: 14px 24px;
+      font-size: 1em;
+      font-weight: 600;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .start-button {
+      background-color: white;
+      color: black;
+    }
+
+    .next-button {
+      background-color: #ffffffaa;
+      color: black;
+    }
+
+    .task-button {
+      background-color: #ffffff33;
+      color: white;
+      margin-top: 25px;
+      width: 100%;
+    }
+
+    #task-overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-color: var(--popup-bg);
+      -webkit-backdrop-filter: blur(9px); /* ✅ ADD THIS */
+      backdrop-filter: blur(8px);      display: none;
+      justify-content: center;
+      align-items: center;}
+    
+      .task-item {
+        background: rgba(255, 255, 255, 0.15);
+        padding: 10px 14px;
+        margin: 6px 0;
+        border-radius: 8px;
+        font-size: 1em;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+    #task-popup {
+      background: var(--focus-bg);
+      padding: 90px;
+      border-radius: 20px;
+      text-align:center;
+      color: white;
+      margin-bottom: 75px;
+      padding-top: 90px ;
+    }
+    .task-item {
+      background-color: rgba(255, 255, 255, 0.1);
+      padding: 10px 15px;
+      margin-bottom: 10px;
+      border-radius: 10px;
+      position: relative;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .task-content {
+    .task-content {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    }
+
+    .task-options {
+      position: relative;
+      display: inline-block;
+    }
+
+    .task-menu-btn {
+      background: transparent;
+      border: none;
+      color: white;
+      font-size: 20px;
+      cursor: pointer;
+    }
+  .save-btn {
+    padding: 6px 10px;
+    font-size: 1.2em;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    background-color: #4caf50;
+    color: white;
+    height: 38px; /* Match input height */
+    line-height: 1;
+  }
+
+    .task-menu {
+      position: absolute;
+      right: 0;
+      top: 30px;
+      background: #fff;
+      border-radius: 6px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      z-index: 10;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .task-menu button {
+      background: none;
+      border: none;
+      color: white;
+      cursor: pointer;
+      text-align: left;
+      font-size: 14px;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    #task-popup input {
+      padding: 10px;
+      width: 100%;
+      margin-bottom: 75px;
+      border: none;
+      border-radius: 6px;
+    }
+    .hidden {
+      display: none !important;
+    }
+    #task-list {
+      margin-top: 20px;
+      text-align: left;
+      color: var(--text-color);
+    }
+  .auth-button {
+      background-color: #333;
+      color: white;
+      border: none;
+      padding: 12px;
+      width: 100%;
+      margin-top: 15px;
+      cursor: pointer;
+    }
+
+.google-btn {
+  background-color: white;
+  color: #444;
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+.link {
+  display: block;
+  margin-top: 15px;
+  color: #007bff;
+  text-decoration: none;}

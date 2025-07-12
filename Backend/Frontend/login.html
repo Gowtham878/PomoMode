@@ -1,0 +1,55 @@
+<!-- login.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login - Pomofocus</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav>
+    <a href="/">Home</a>
+    </nav>
+  <div class="login-container">
+    <h1>Pomofocus</h1>
+    <h2>Login</h2>
+
+    
+    <input id="email" type="email" placeholder="example@mail.com">
+    <input id="pass" type="password" placeholder="Password">
+
+    <button type="button" onclick="handlePost()" class="auth-button">Log in with Email</button>
+
+    <a class="link" href="#">Forgot Password</a>
+    <p>Do not have an account? <a class="link" href="/register">Create account</a></p>
+    <script>
+      async function handlePost() {
+        const email = document.getElementById("email").value;
+        const password = document.getElementById("pass").value;
+
+        try {
+          const res = await fetch('/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, password })
+          });
+
+          const data = await res.json();
+          console.log("Login response:", data);
+
+          if (res.ok) {
+            alert("Login successful!");
+            // Redirect if needed
+            // window.location.href = "/dashboard";
+          } else {
+            alert(data.message || "Login failed");
+          }
+        } catch (err) {
+          console.error("Error during login:", err);
+        }
+      }
+    </script>
+  </div>
+</body>
+</html>

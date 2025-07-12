@@ -1,0 +1,87 @@
+<!-- signup.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Create Account - Pomofocus</title>
+  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <nav>
+    <a href="/">Home</a>
+    </nav>
+    <div class="signup-container">
+    <h1>Pomofocus</h1>
+    <h2>Create Account</h2>
+
+    <input required  id="username" type="text" placeholder="Username">
+    <input required id="email" type="email"  placeholder="example@mail.com">
+    <input required id="pass" type="password"  placeholder="Password">
+    <input required id="passconf" type="password"  placeholder="Confirm Password">
+
+    <button type="button" onclick="validateSignup()" class="auth-button">Sign up with Email</button>
+    <p class="signupError" id="error" ></p>
+
+    <p>Already have an account? <a class="link" href="/login">Log in</a></p>      
+  <script>
+   async function handlsignin() {
+      const username = document.getElementById('username').value;
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('pass').value;
+      const error = document.getElementById('error').value
+      console.log("handling signin")
+      try{
+      const res = await fetch('/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password })
+      });
+
+      const data = await res.json();
+      console.log(data);
+       if (res.ok) {
+            alert("Signup successful!");
+            // Redirect if needed
+            window.location.href = "/";
+          } else {
+            alert(data.message || "Sigup failed")
+          }
+        
+    }catch(err){
+      console.log("failed ",err)
+    }}
+    
+    async function validateSignup() {
+      const pw = document.getElementById('pass').value;
+      const cpw = document.getElementById('passconf').value;
+
+      if (pw !== cpw) {
+        error.innerText = 'Passwords do not match.';
+        return;
+      }
+    document.addEventListener("click", function (e) {
+      const isMenuBtn = e.target.closest(".task-menu-btn");
+      const isMenu = e.target.closest(".task-menu");
+
+      if (!isMenuBtn && !isMenu) {
+        document.querySelectorAll(".task-menu").forEach(menu => {
+          menu.classList.add("hidden");
+        });
+      }
+    });
+
+      const pattern = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/;
+      if (!pattern.test(pw)) {
+        error.innerText = 'Password must be 8+ characters, include 1 capital, 1 number, and 1 symbol.';
+        return;
+      }
+      handlsignin()
+      .then(  ()=>{ 
+        console.log("pass checked")
+        return error.innerText = 'Signup successful! (Demo only)'})
+    }
+  </script>
+  </div>
+</body>
+</html>
