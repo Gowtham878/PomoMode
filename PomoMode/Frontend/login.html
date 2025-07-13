@@ -1,4 +1,3 @@
-<!-- login.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,7 +8,15 @@
 </head>
 <body>
     <nav>
-    <a href="/">Home</a>
+      <a href="/">
+        <svg xmlns="https://www.w3.org/TR/SVG/" width="24" height="24" 
+          fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" 
+          class="feather feather-home">
+          <path d="M3 9L12 2l9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+          <polyline points="9 22 9 12 15 12 15 22"/>
+        </svg>
+        <span class="sr-only">Home</span>
+      </a>
     </nav>
   <div class="login-container">
     <h1>Pomofocus</h1>
@@ -19,35 +26,39 @@
     <input id="email" type="email" placeholder="example@mail.com">
     <input id="pass" type="password" placeholder="Password">
 
-    <button type="button" onclick="handlePost()" class="auth-button">Log in with Email</button>
+    <button type="submit" onclick="handlePost()" class="auth-button">Log in with Email</button>
 
-    <a class="link" href="#">Forgot Password</a>
+    <a class="link" href="/forgotpassword ">Forgot Password?</a>
     <p>Do not have an account? <a class="link" href="/register">Create account</a></p>
     <script>
       async function handlePost() {
         const email = document.getElementById("email").value;
         const password = document.getElementById("pass").value;
-
-        try {
-          const res = await fetch('/login', {
+          console.log("Fetching the user")
+          const request = await fetch('/login', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email, password })
-          });
-
-          const data = await res.json();
-          console.log("Login response:", data);
-
-          if (res.ok) {
-            alert("Login successful!");
-            // Redirect if needed
-            // window.location.href = "/dashboard";
+          })
+          console.log("Fetched user successfully")
+          if (request.ok)
+          {
+            //alert("Login successful!");
+            const data = await request.json()
+            console.log("data parsed successfully")
+            localStorage.setItem("token", data.token);
+            localStorage.setItem("user", JSON.stringify
+              ({
+                _id: data._id,
+                username: data.username,
+                email: data.email,
+                profileImage: data.profileImage,
+              }));    
+            console.log("redirecting the user to home")         
+            window.location.href = "/";
           } else {
             alert(data.message || "Login failed");
           }
-        } catch (err) {
-          console.error("Error during login:", err);
-        }
       }
     </script>
   </div>

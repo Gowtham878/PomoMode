@@ -9,79 +9,81 @@
 </head>
 <body>
     <nav>
-    <a href="/">Home</a>
+      <a href="/">
+        <svg xmlns="https://www.w3.org/TR/SVG/" width="24" height="24" 
+          fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" 
+          class="feather feather-home">
+          <path d="M3 9L12 2l9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+          <polyline points="9 22 9 12 15 12 15 22"/>
+        </svg>
+        <span class="sr-only">Home</span>
+      </a>
     </nav>
-    <div class="signup-container">
-    <h1>Pomofocus</h1>
-    <h2>Create Account</h2>
 
-    <input required  id="username" type="text" placeholder="Username">
-    <input required id="email" type="email"  placeholder="example@mail.com">
-    <input required id="pass" type="password"  placeholder="Password">
-    <input required id="passconf" type="password"  placeholder="Confirm Password">
+    <form id="signupForm" action="">
+      <div class="signup-container">
+        <h1>Pomofocus</h1>
+        <h2>Create Account</h2>
+        <input required  id="username" type="text" placeholder="Username">
+        <input required id="email" type="email"  placeholder="example@mail.com">
+        <input required id="password" type="password"  placeholder="Password">
+        <input required id="confirmPassword" type="password"  placeholder="Confirm Password">
+        <div class="signupError" id="error" ></div>
+        <button type="submit" class="auth-button">Sign up with Email</button>
 
-    <button type="button" onclick="validateSignup()" class="auth-button">Sign up with Email</button>
-    <p class="signupError" id="error" ></p>
+        <p>Already have an account? <a class="link" href="/login">Log in</a></p>      
+      </div>
+    </form>
+    <script>
+      const form = document.getElementById("signupForm")
+      const error = document.getElementById("error")
 
-    <p>Already have an account? <a class="link" href="/login">Log in</a></p>      
-  <script>
-   async function handlsignin() {
-      const username = document.getElementById('username').value;
-      const email = document.getElementById('email').value;
-      const password = document.getElementById('pass').value;
-      const error = document.getElementById('error').value
-      console.log("handling signin")
-      try{
-      const res = await fetch('/register', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password })
-      });
+      form.addEventListener("submit" , async (e)=>{
+        e.preventDefault()
+        const username = form.username.value.trim();
+        const email = form.email.value.trim()
+        const password = form.password.value;
+        const confirmPassword = form.confirmPassword.value
 
-      const data = await res.json();
-      console.log(data);
-       if (res.ok) {
-            alert("Signup successful!");
-            // Redirect if needed
-            window.location.href = "/";
-          } else {
-            alert(data.message || "Sigup failed")
-          }
+        if (password !== confirmPassword) {
+          error.textContent = 'Passwords do not match.';
+          return;
+        }
+        const pattern = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/
+        if (!pattern.test(password)) {
+          error.textContent = 'Password must be 8+ characters, include 1 capital, 1 number, and 1 symbol.'
+          return;
+        }
         
-    }catch(err){
-      console.log("failed ",err)
-    }}
-    
-    async function validateSignup() {
-      const pw = document.getElementById('pass').value;
-      const cpw = document.getElementById('passconf').value;
+        const body = JSON.stringify({username,email,password})
+        console.log("body before fetc: ",body.toString())
+        const request = await fetch('/register',{
+          method:"POST",
+          headers:{'Content-Type':'application/json'},
+          body:JSON.stringify({username,email,password})
+        })  
+        if (request.ok) 
+        {
+          const data = await request.json();  // ← get token and user data
+          localStorage.setItem("token", data.token);
+          localStorage.setItem("user", JSON.stringify
+          ({
+            username: data.username,
+            email: data.email,
+            profileImage: data.profileImage,
+          }));
+          window.location.href = "/";
+        } 
+        else
+        {
+          const errorData = await request.json();
+          error.textContent = "Signup Failed!!</br>"+errorData.message
+        }
+        console.log('Sign up successful:', { username, email, password })
+        
+         
+      })
+    </script>
 
-      if (pw !== cpw) {
-        error.innerText = 'Passwords do not match.';
-        return;
-      }
-    document.addEventListener("click", function (e) {
-      const isMenuBtn = e.target.closest(".task-menu-btn");
-      const isMenu = e.target.closest(".task-menu");
-
-      if (!isMenuBtn && !isMenu) {
-        document.querySelectorAll(".task-menu").forEach(menu => {
-          menu.classList.add("hidden");
-        });
-      }
-    });
-
-      const pattern = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/;
-      if (!pattern.test(pw)) {
-        error.innerText = 'Password must be 8+ characters, include 1 capital, 1 number, and 1 symbol.';
-        return;
-      }
-      handlsignin()
-      .then(  ()=>{ 
-        console.log("pass checked")
-        return error.innerText = 'Signup successful! (Demo only)'})
-    }
-  </script>
-  </div>
 </body>
 </html>

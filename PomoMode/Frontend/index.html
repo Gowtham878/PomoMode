@@ -1,59 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>PomoMode - Timer</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
-</head>
-<body >
-  <nav>
-    <a href="/login">Login</a>
-    <a href="/register">Register</a>
-  </nav>
+<!--HEAD is here!-->
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PomoMode - Timer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+  </head>
 
-  <div class="glass-box">
-    <div class="headline">PomoMode</div>
-    <div class="tab-group">
-      <div class="tab active" id="pomodoro-tab" onclick="clickSound(); switchMode('pomodoro')">Focus</div>
-      <div class="tab" id="short-tab" onclick="clickSound(); switchMode('short')">Short Break</div>
-      <div class="tab" id="long-tab" onclick="clickSound(); switchMode('long')">Long Break</div>
-    </div>
+<!--Body Starts Hereeee-->
+  <body >
+    <nav>
 
-    <div class="timer-container">
-      <svg class="progress-ring" width="220" height="220">
-        <circle r="100" cx="110" cy="110" stroke="#fff" stroke-width="10" fill="transparent" stroke-dasharray="628" stroke-dashoffset="0" id="progress-ring"></circle>
-      </svg>
-      <div class="timer" id="timer">25:00</div>
-    </div>
+      <!-- profile--->
+      <div class="profile-wrapper">
+        <img
+          id="profileAvatar"
+          class="profile-avatar"
+          src="https://cdn-icons-png.flaticon.com/512/149/149071.png"
+          alt="Profile"
+        />
+        <div id="profileDropdown" class="profile-dropdown">
+          <div class="profile-info">
+            <img id="dropdownAvatar" class="dropdown-avatar" src="" alt="Avatar" />
+            <div>
+              <div id="dropdownUsername" class="profile-name">Guest</div>
+              <div id="dropdownEmail" class="profile-email">guest@noaccount.com</div>
+            </div>
+          </div>
+          <hr />
+          <div class="dropdown-actions" id="dropdownActions">
+            <button class="profile-btn" id="loginBtn">Login</button>
+            <button class="profile-btn" id="signupBtn">Sign Up</button>
+          </div>
+        </div>
+      </div>
 
-    <div class="button-group">
-      <button type="button" class="start-button" onclick="clickSound(); startTimer()">START</button>
-      <button type="button" class="next-button" onclick="clickSound(); skipToNextMode()">⏭</button>
-    </div>
+    </nav>        
+    <h1 class="main-heading">PomoMode -Plan. Execute. Hustle.</h1>
 
-    <button type="button" class="task-button" onclick="clickSound(); openTaskPopup()">+ Add Task</button>
-    <div id="task-list"></div>
-  </div>
+    <!--The timer card-->
+      <div class="glass-box">
+        <div class="tab-group">
+          <div class="tab active" id="pomodoro-tab" onclick="clickSound(); switchMode('pomodoro')">Focus</div>
+          <div class="tab" id="short-tab" onclick="clickSound(); switchMode('short')">Short Break</div>
+          <div class="tab" id="long-tab" onclick="clickSound(); switchMode('long')">Long Break</div>
+      </div>
+    <!-- The timer section time, start,pause, next -->
+        <div class="timer-container">
+          <svg class="progress-ring" width="220" height="220">
+            <circle r="100" cx="110" cy="110" stroke="#fff" stroke-width="10" fill="transparent" stroke-dasharray="628" stroke-dashoffset="0" id="progress-ring"></circle>
+          </svg>
+          <div class="timer" id="timer">25:00</div>
+        </div>
 
-  <div id="task-overlay">
-    <div id="task-popup">
-      <h1>Add Your Task</h1>
-      <input type="text" id="task-input" placeholder="Task name" />
-      <br />
-      <button type="button" onclick="clickSound(); addTask()">Add Task</button>
-    </div>
-  </div>
+        <div class="button-group">
+          <button type="button" class="start-button" onclick="clickSound(); startTimer()">START</button>
+          <button type="button" class="next-button" onclick="clickSound(); skipToNextMode()">⏭</button>
+        </div>
 
-<audio id="timerSound" preload="auto">
-  <source src="alarm.wav" type="audio/wav">
-</audio>
-<audio id="clickSound" preload="auto">
-  <source src="click.wav" type="audio/wav">
-</audio>
-  <script src="script.js"></script>
-</body>
+        <button type="button" class="task-button" onclick="clickSound(); openTaskPopup()">+ Add Task</button>
+        <div id="task-list"></div>
+        </div>
+    <!--Adding the tasks-->
+        <div id="task-overlay">
+          <div id="task-popup">
+            <h1>Add Task</h1>
+            <input type="text" id="task-input" placeholder="Task name" />
+            <br />
+            <button type="button" onclick="clickSound(); addTask()">Add Task</button>
+          </div>
+        </div>
+    <!-- loading the audio files and the script-->
+        <audio id="timerSound" preload="auto">
+          <source src="alarm.wav" type="audio/wav">
+        </audio>
+        <audio id="clickSound" preload="auto">
+          <source src="click.wav" type="audio/wav">
+        </audio>
+      <script src="script.js"></script>
+  </body>
 </html>

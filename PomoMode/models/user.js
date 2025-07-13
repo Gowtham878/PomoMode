@@ -17,20 +17,23 @@ const userSchema = new mongoose.Schema({
         require:true,
         minLength:8
     },
-    username:{
+    resetkey:{
+        type:String,
+    },
+    profileImage:{
         type:String,
         require:true,
         unique:true
     }   
 },{timestamps:true})
 
-userSchema.pre("save", async function(next) {
+userSchema.pre("save", async function (next) {
     try {
         if (!this.isModified("password")) return next();
 
         const salt = await bcrypt.genSalt(10);
-        this.password = await bcrypt.hash(this.password, salt);
-
+        this.password = await bcrypt.hash(this.password, salt)
+        this.resetkey = await bcrypt.hash(this.username, salt)
         console.log("Password has been encrypted");
         next();
     } catch (error) {
@@ -38,6 +41,4 @@ userSchema.pre("save", async function(next) {
     }
 })
 
-const User = mongoose.model("User",userSchema)
-
-export default User
+export default mongoose.models.User || mongoose.model("User", userSchema);
